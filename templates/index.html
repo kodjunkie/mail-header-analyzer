@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{url_for('static', filename='imgs/fav.png')}}">
+    <title>Mail Header Analyzer (MHA)</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+
+    <!-- Fonts -->
+    <link href="{{url_for('static', filename='fonts/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet"
+          type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom Theme CSS -->
+    <link href="{{url_for('static', filename='assets/css/grayscale.css')}}" rel="stylesheet">
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href="#page-top">
+                <i class="fa fa-envelope-o"></i> <span class="light">Mail Header Analyzer</span> (MHA)
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#about">About</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<section class="intro">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 class="brand-heading">Mail Header Analyzer</h1>
+                    <p class="intro-text">Introduction text</p>
+                    <p>
+                        <a href="{{ url_for('analyze') }}" class="btn btn-default btn-lg">
+                            <i class="fa fa-envelope-o fa-fw"></i> <span class="network-name">Analyze Mail Header</span>
+                        </a>
+                    </p>
+                    <div class="page-scroll">
+                        <a href="#about" class="btn btn-circle">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="container content-section text-center">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h2>About Mail Header Analyzer</h2>
+            <p>Grayscale is a premium quality, free Bootstrap 3 theme created by Start Bootstrap. It can be yours right
+                now, all you need to do is download the template on the preview page. You can use this template for any
+                purpose, personal or commercial.</p>
+            <p>This striking, black and white theme features stock photographs by <a href="http://gratisography.com/">Gratisography</a>
+                along with a custom Google Map skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
+            <p>With this template, just the slightest splash of color can make a huge impact on the overall presentation
+                and design.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Core JavaScript Files -->
+<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static', filename='assets/js/jquery.easing.min.js')}}"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="{{url_for('static', filename='assets/js/grayscale.js')}}"></script>
+
+</body>
+</html>
