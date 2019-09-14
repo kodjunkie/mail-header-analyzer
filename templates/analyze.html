@@ -14,8 +14,6 @@
     <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="{{url_for('static', filename='css/ie10-viewport-bug-workaround.css')}}" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="{{url_for('static', filename='css/starter-template.css')}}" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="{{url_for('static', filename='js/ie-emulation-modes-warning.js')}}"></script>
@@ -26,11 +24,13 @@
     <![endif]-->
     <link href="{{url_for('static', filename='css/bootstrap-table.min.css')}}" rel="stylesheet">
     <link href="{{url_for('static', filename='css/flag-sprites.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static', filename='css/starter-template.css')}}" rel="stylesheet">
 </head>
 
 <body>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar bg-black navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -75,7 +75,8 @@
                 {% endif %}
             </div>
         </div>
-        <table id="table" data-toggle="table" data-search="true" data-show-columns="true" data-striped="true"
+        <div style="background-color: #fff">
+            <table id="table" data-toggle="table" data-search="true" data-show-columns="true" data-striped="true"
             data-show-toggle="true" data-show-refresh="true" data-page-size="13" data-sort-name="hop"
             data-sort-order="asc">
             <thead style="background-color: #333333;color:#d4d4d4;">
@@ -112,6 +113,7 @@
                 {% endfor %}
             </tbody>
         </table>
+        </div>
         <div class="panel panel-default" style="margin-top: 10px;">
             <!-- Default panel contents -->
             <div class="panel-heading">

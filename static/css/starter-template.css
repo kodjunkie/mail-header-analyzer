@@ -1,7 +1,42 @@
 body {
   padding-top: 50px;
+  background-color: #141e28;
 }
+
 .starter-template {
   padding: 40px 15px;
   text-align: center;
+}
+
+.btn-primary {
+    background-color: #1b95e0;
+}
+
+.btn-primary:hover {
+    background-color: #2bacfb;
+}
+
+.bg-black {
+    background-color: #000000;
+}
+
+a {
+    color: #1b95e0;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+    color: #2bacfb;
+}
+
+.navbar {
+    margin-bottom: 0;
+    border-bottom: 1px solid rgb(29,161,242);
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #000;
 }
