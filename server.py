@@ -204,9 +204,17 @@ def analyze():
 
         security_headers = ['Received-SPF', 'Authentication-Results',
                             'DKIM-Signature', 'ARC-Authentication-Results']
+
+        ip = ''
+        for i, v in r.items():
+            get_ip = re.search("[0-9]+(?:\.[0-9]+){3}", v['Direction'][0])
+            if get_ip:
+                ip = get_ip.group()
+                break
+
         return render_template(
             'analyze.html', data=r, delayed=delayed, summary=summary,
-            n=n, chart=chart, security_headers=security_headers)
+            n=n, chart=chart, security_headers=security_headers, ip=ip)
     else:
         return render_template('analyze.html')
 

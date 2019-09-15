@@ -40,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Mail Header Analyzer <small>(MHA)</small></a>
+                <a class="navbar-brand" href="/{{ 'analyze' if data else '' }}">Mail Header Analyzer <small>(MHA)</small></a>
             </div>
         </div>
     </nav>
@@ -200,31 +200,39 @@
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
 
-            // Make first letter Capital
-            function changeCaseFirstLetter(param) {
-                if(typeof param === 'string') {
-                        return param.charAt(0).toUpperCase() + param.slice(1);
+            {% if ip %}
+                // Make first letter Capital
+                function changeCaseFirstLetter(param) {
+                    if(typeof param === 'string') {
+                            return param.charAt(0).toUpperCase() + param.slice(1);
+                    }
+                    return null;
                 }
-                return null;
-            }
 
-            // Get IP Geo location
-            $.ajax({
-                method: 'GET',
-                url: 'http://ip-api.com/json/{{data.items()[0][1]['Direction'][1]}}',
-                beforeSend: function() {
-                    $('div#ip-details').html("<div style='text-align:center;'>Loading<img src='{{url_for('static', filename='assets/img/loading.gif')}}'></div>");
-                },
-                success: function(geoIP) {
-                    let template = '';
-                    const entries = Object.entries(geoIP);
-                    entries.map(function(value) {
-                        template += '<tr><th>'+changeCaseFirstLetter(value[0])+'</th><td>'+value[1]+'</td></tr>';
-                    });
+                // Get IP Geo location
+                let el = $('div#ip-details');
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://ip-api.com/json/{{ ip }}',
+                    beforeSend: function() {
+                        el.html("<div style='text-align:center;'>Loading<img src='{{url_for('static', filename='assets/img/loading.gif')}}'></div>");
+                    },
+                    success: function(geoIP) {
+                        if (geoIP.status === 'fail') {
+                            el.html("<div style='text-align:center;'>Reserved: couldn't access <b>IP</b> information.</div>");
+                        }
+                        else {
+                            let template = '';
+                            const entries = Object.entries(geoIP);
+                            entries.map(function(value) {
+                                template += '<tr><th>'+changeCaseFirstLetter(value[0])+'</th><td>'+value[1]+'</td></tr>';
+                            });
 
-                    $('div#ip-details').addClass('table-responsive').html('<table class="table table-bordered">'+template+'</table>');
-                }
-            });
+                            el.addClass('table-responsive').html('<table class="table table-bordered">'+template+'</table>');
+                        }
+                    }
+                });
+            {% endif %}
         });
     </script>
 </body>
