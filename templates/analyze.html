@@ -225,7 +225,7 @@
                             let template = '';
                             const entries = Object.entries(geoIP);
                             entries.map(function(value) {
-                                template += '<tr><th>'+changeCaseFirstLetter(value[0])+'</th><td>'+value[1]+'</td></tr>';
+                                template += '<tr><th width="20%">'+changeCaseFirstLetter(value[0])+'</th><td>'+value[1]+'</td></tr>';
                             });
 
                             el.addClass('table-responsive').html('<table class="table table-bordered">'+template+'</table>');
