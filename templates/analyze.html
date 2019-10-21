@@ -45,8 +45,10 @@
         </div>
     </nav>
     <!-- Begin page content -->
-    <div class="container-fluid" style="padding-top: 50px;">
+    <div class="container-fluid" style="padding-top: 50px;" id="pdf-content">
         {% if data %}
+        <a id="download-report" class="btn btn-primary pull-right">Download Report</a>
+        <div class="clearfix"></div>
         <div class="well well-lg">
             <div class="row" style="padding-top: 15px;">
                 <div class="col-md-6">
@@ -132,7 +134,7 @@
                     {% for k,v in n.items() %}
                     {% if k in security_headers %}
                     <tr>
-                        <th>{{ k }}</th>
+                        <th width="20%">{{ k }}</th>
                         <td>{{ v }}</td>
                     </tr>
                     {% endif %} {% endfor %}
@@ -149,7 +151,7 @@
                     {% for k,v in n.items() %}
                     {% if k.startswith('X-') %}
                     <tr>
-                        <th>{{ k }}</th>
+                        <th width="20%">{{ k }}</th>
                         <td>{{ v }}</td>
                     </tr>
                     {% endif %} {% endfor %}
@@ -222,7 +224,7 @@
                                 '<tr><th>Latitude</th><td>'+geoIP.lat+'</td></tr>' +
                                 '<tr><th>Longitude</th><td>'+geoIP.lon+'</td></tr>' +
                                 '<tr><th>Organization</th><td>'+geoIP.org+'</td></tr>' +
-                                '<tr><th>Query</th><td>'+geoIP.query+'</td></tr>' +
+                                '<tr><th>IP Address</th><td>'+geoIP.query+'</td></tr>' +
                                 '<tr><th>Region</th><td>'+geoIP.region+'</td></tr>' +
                                 '<tr><th>Region Name</th><td>'+geoIP.regionName+'</td></tr>' +
                                 '<tr><th>Timezone</th><td>'+geoIP.timezone+'</td></tr>' +
@@ -236,6 +238,18 @@
                     }
                 });
             {% endif %}
+        });
+    </script>
+
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+    <script>
+        let doc = new jsPDF({orientation: 'landscape'});
+        let elementHTML = $('#pdf-content').html();
+
+        $('a#download-report').click(function() {
+            doc.fromHTML(elementHTML);
+            // Save the PDF
+            doc.save('Mail-header-report.pdf');
         });
     </script>
 </body>
