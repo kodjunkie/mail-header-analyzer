@@ -45,8 +45,10 @@
         </div>
     </nav>
     <!-- Begin page content -->
-    <div class="container-fluid" style="padding-top: 50px;">
+    <div class="container-fluid" style="padding-top: 50px;" id="pdf-content">
         {% if data %}
+        <a id="download-report" class="btn btn-primary pull-right">Download Report</a>
+        <div class="clearfix"></div>
         <div class="well well-lg">
             <div class="row" style="padding-top: 15px;">
                 <div class="col-md-6">
@@ -132,7 +134,7 @@
                     {% for k,v in n.items() %}
                     {% if k in security_headers %}
                     <tr>
-                        <th>{{ k }}</th>
+                        <th width="20%">{{ k }}</th>
                         <td>{{ v }}</td>
                     </tr>
                     {% endif %} {% endfor %}
@@ -149,7 +151,7 @@
                     {% for k,v in n.items() %}
                     {% if k.startswith('X-') %}
                     <tr>
-                        <th>{{ k }}</th>
+                        <th width="20%">{{ k }}</th>
                         <td>{{ v }}</td>
                     </tr>
                     {% endif %} {% endfor %}
@@ -201,14 +203,6 @@
             $('[data-toggle="tooltip"]').tooltip();
 
             {% if ip %}
-                // Make first letter Capital
-                function changeCaseFirstLetter(param) {
-                    if(typeof param === 'string') {
-                            return param.charAt(0).toUpperCase() + param.slice(1);
-                    }
-                    return null;
-                }
-
                 // Get IP Geo location
                 let el = $('div#ip-details');
                 $.ajax({
@@ -222,17 +216,40 @@
                             el.html("<div style='text-align:center;'>Reserved: couldn't access <b>IP</b> information.</div>");
                         }
                         else {
-                            let template = '';
-                            const entries = Object.entries(geoIP);
-                            entries.map(function(value) {
-                                template += '<tr><th width="20%">'+changeCaseFirstLetter(value[0])+'</th><td>'+value[1]+'</td></tr>';
-                            });
+                            let template = '<tr><th width="20%">As</th><td>'+geoIP.as+'</td></tr>' +
+                                '<tr><th>City</th><td>'+geoIP.city+'</td></tr>' +
+                                '<tr><th>Country</th><td>'+geoIP.country+'</td></tr>' +
+                                '<tr><th>Country Code</th><td>'+geoIP.countryCode+'</td></tr>' +
+                                '<tr><th>ISP</th><td>'+geoIP.isp+'</td></tr>' +
+                                '<tr><th>Latitude</th><td>'+geoIP.lat+'</td></tr>' +
+                                '<tr><th>Longitude</th><td>'+geoIP.lon+'</td></tr>' +
+                                '<tr><th>Organization</th><td>'+geoIP.org+'</td></tr>' +
+                                '<tr><th>IP Address</th><td>'+geoIP.query+'</td></tr>' +
+                                '<tr><th>Region</th><td>'+geoIP.region+'</td></tr>' +
+                                '<tr><th>Region Name</th><td>'+geoIP.regionName+'</td></tr>' +
+                                '<tr><th>Timezone</th><td>'+geoIP.timezone+'</td></tr>' +
+                                '<tr><th>Zip Code</th><td>'+geoIP.zip+'</td></tr>';
 
                             el.addClass('table-responsive').html('<table class="table table-bordered">'+template+'</table>');
                         }
+                    },
+                    error: function() {
+                        el.html("<div style='text-align:center;'>Couldn't access <b>IP</b> Information.</div>");
                     }
                 });
             {% endif %}
+        });
+    </script>
+
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+    <script>
+        let doc = new jsPDF({orientation: 'landscape'});
+        let elementHTML = $('#pdf-content').html();
+
+        $('a#download-report').click(function() {
+            doc.fromHTML(elementHTML);
+            // Save the PDF
+            doc.save('Mail-header-report.pdf');
         });
     </script>
 </body>
