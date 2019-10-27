@@ -23,7 +23,7 @@ source virt/bin/activate
 ```
 Clone the GitHub repo:  
 ```
-git clone https://github.com/lnxg33k/MHA.git
+git clone https://github.com/kodjunkie/mail-header-analyzer.git
 ```
 Install Python dependencies:
 ```
