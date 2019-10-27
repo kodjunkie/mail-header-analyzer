@@ -142,6 +142,7 @@ a:focus {
 
 .brand-heading {
     font-size: 46px;
+    margin-top: 3.6em;
 }
 
 .intro-text {
@@ -155,7 +156,7 @@ a:focus {
     }
 
     .brand-heading {
-        font-size: 50px;
+        font-size: 40px;
     }
 
     .intro-text {
