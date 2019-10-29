@@ -238,17 +238,17 @@
                     }
                 });
             {% endif %}
+
+            // Download Report
+            $("a#download-report").click(function () {
+                $('title').text('E-mail Header Report');
+                $(this).hide();
+                $('button').hide();
+                $('input').hide();
+                window.print();
+            });
         });
     </script>
 
-    <script type="text/javascript">
-        $("a#download-report").click(function () {
-            $('title').text('E-mail Header Report');
-            $(this).hide();
-            $('button').hide();
-            $('input').hide();
-            window.print();
-        });
-    </script>
 </body>
 </html>
