@@ -168,7 +168,7 @@
                     {% for k,v in n.items() %}
                     {% if k not in ['Received','Subject','From','To','Message-ID','CC','Date'] and k not in security_headers and not k.startswith('X-') %}
                     <tr>
-                        <th>{{ k }}</th>
+                        <th width="20%">{{ k }}</th>
                         <td>{{ v }}</td>
                     </tr>
                     {% endif %} {% endfor %}
@@ -241,15 +241,13 @@
         });
     </script>
 
-    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-    <script>
-        let doc = new jsPDF({orientation: 'landscape'});
-        let elementHTML = $('#pdf-content').html();
-
-        $('a#download-report').click(function() {
-            doc.fromHTML(elementHTML);
-            // Save the PDF
-            doc.save('Mail-header-report.pdf');
+    <script type="text/javascript">
+        $("a#download-report").click(function () {
+            $('title').text('E-mail Header Report');
+            $(this).hide();
+            $('button').hide();
+            $('input').hide();
+            window.print();
         });
     </script>
 </body>
