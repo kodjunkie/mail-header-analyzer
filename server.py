@@ -4,6 +4,7 @@ from flask import request
 
 from email.Parser import HeaderParser
 import time
+import hashlib
 import dateutil.parser
 
 from datetime import datetime
@@ -202,6 +203,8 @@ def analyze():
             'Date': n.get('Date') or getHeaderVal('Date', mail_data),
         }
 
+        message_hash = hashlib.md5(summary['MessageID']).hexdigest()
+
         security_headers = ['Received-SPF', 'Authentication-Results',
                             'DKIM-Signature', 'ARC-Authentication-Results']
 
@@ -214,7 +217,7 @@ def analyze():
 
         return render_template(
             'analyze.html', data=r, delayed=delayed, summary=summary,
-            n=n, chart=chart, security_headers=security_headers, ip=ip)
+            n=n, chart=chart, security_headers=security_headers, ip=ip, hash=message_hash)
     else:
         return render_template('analyze.html')
 
