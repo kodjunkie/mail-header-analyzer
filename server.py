@@ -41,6 +41,7 @@ def utility_processor():
                         'iso_code': r.iso_code.lower(),
                         'country_name': r.name
                     }
+
     return dict(country=getCountryForIP)
 
 
@@ -58,6 +59,7 @@ def utility_processor():
             ], ['wk', 'd', 'hr', 'min', 'sec'])
             if num
         )
+
     return dict(duration=duration)
 
 
@@ -203,11 +205,20 @@ def analyze():
             'Date': n.get('Date') or getHeaderVal('Date', mail_data),
         }
 
-        message_hash = hashlib.md5(summary['MessageID']).hexdigest()
-
         security_headers = ['Received-SPF', 'Authentication-Results',
                             'DKIM-Signature', 'ARC-Authentication-Results']
 
+        # Hash
+        message_hash = hashlib.md5(summary['MessageID']).hexdigest()
+
+        # Log activity
+        log = open('LogHistory.log', 'a')
+        log.write(
+            'IP: ' + request.remote_addr + '\nTime: ' + time.ctime() + '\nHash: ' +
+            hashlib.md5(time.ctime()).hexdigest() + '\n -----------------------------------\n')
+        log.close()
+
+        # Get mail server IP
         ip = ''
         for i, v in r.items():
             get_ip = re.search("[0-9]+(?:\.[0-9]+){3}", v['Direction'][0])
