@@ -47,3 +47,6 @@ A `Dockerfile` is provided if you wish to build a docker image.
 You can then run a container with:
 
 `docker run -d -p 8080:8080 mha:latest`
+
+## Credits
+Built on [github.com/lnxg33k/email-header-analyzer](https://github.com/lnxg33k/email-header-analyzer)
