@@ -3,7 +3,7 @@
 
 
 ## What is E-Mail header analyzer (MHA):
-E-Mail header analyzer is a tool written in [flask](http://flask.pocoo.org/) for parsing email headers and converting them to a human readable format and it also can:    
+E-Mail header analyzer is a tool written in [flask](http://flask.pocoo.org/) for parsing email headers and converting them to a human readable format and Based on the common practice in e-mail investigation,the developed system provides the following functionalities:       
 * Identify hop delays.
 * Identify the source of the email.
 * Identify hop country.
